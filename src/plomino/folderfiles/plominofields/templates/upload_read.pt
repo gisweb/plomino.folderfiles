@@ -1,0 +1,43 @@
+
+<tal:block tal:define="
+    widget python:options['field'].getSettings('widget');
+    maxsize python:options['field'].getSettings('maxsize') and options['field'].getSettings('maxsize');
+    filetypes python:options['field'].getSettings('filetype') and options['field'].getSettings('filetype').replace(' ', '').replace(',', '|');">
+
+<div tal:content="widget"></div>
+<div tal:content="maxsize"></div>
+<div tal:content="filetypes"></div>
+
+<tal:single tal:condition="python:widget=='SINGLE'">
+
+    <a tal:define="field options/fieldname" class="directupload"  id="string:directupload-$field" class="contenttype-multiple-files link-overlay" title="A form to upload multiple files." tal:attributes="href string:@@directupload/$field;rel string:#checosaserve;" style="cursor: pointer;">
+    <div class="iol-upload-doc" tal:attributes="id string:${options/fieldname}-uploaddoc;data-maxsize maxsize;data-extensions filetypes"></div>
+    </a>
+
+</tal:single>
+
+
+<tal:multi tal:condition="python:widget=='MULTI'">
+
+<div>
+
+    <a tal:define="field options/fieldname" class="directupload"  id="string:directupload-$field" class="contenttype-multiple-files link-overlay" title="A form to upload multiple files." tal:attributes="href string:@@directupload/$field?multi=1;rel string:#pbbff" style="cursor: pointer;">
+    <div class="iol-multi-upload-doc" tal:attributes="id string:${options/fieldname}-uploaddoc;"></div>
+    </a>
+
+</div>
+
+
+</tal:multi>
+
+<tal:downloadupload tal:condition="python:widget=='DOWN-UP'">
+
+    <div class="iol-wait-doc" tal:attributes="id string:${options/fieldname}-createdoc;"></div>
+
+   <a tal:define="field options/fieldname" class="directupload"  id="string:directupload-$field" class="contenttype-multiple-files link-overlay" title="A form to upload multiple files." tal:attributes="href string:@@directupload/$field;rel string:#checosaserve;" style="cursor: pointer;">
+    <div class="iol-upload-doc" tal:attributes="id string:${options/fieldname}-uploaddoc;data-maxsize maxsize;data-extensions filetypes"></div>
+    </a>
+</tal:downloadupload>
+
+
+</tal:block>

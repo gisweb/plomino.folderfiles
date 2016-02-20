@@ -1,0 +1,41 @@
+.iol-wait-doc {
+  height:100px;
+  width:100px;
+  background: url('images/loading-2.gif') no-repeat center;
+  background-color: #FFF;
+  float:left;
+}
+.iol-download-doc {
+  height:70px;
+  width:70px;
+  background: url('images/doc-download-red-small.png') no-repeat center;
+  background-color: #FFF;
+  cursor: pointer;
+  float:left;
+}
+
+.iol-create-doc {
+  height:100px;
+  width:100px;
+  background: url('images/doc-download-red.png') no-repeat center;
+  background-color: #FFF;
+  cursor: pointer;
+}
+
+.iol-upload-doc {
+  height:70px;
+  width:70px;
+  background: url('images/doc-upload-small.png') no-repeat center;
+  background-color: #FFF;
+  float:left;
+  margin-left: 20px;
+}
+
+.iol-multi-upload-doc {
+  height:70px;
+  width:70px;
+  background: url('images/doc-multi-upload.png') no-repeat center;
+  background-color: #FFF;
+  float:left;
+  margin-left: 20px;
+}

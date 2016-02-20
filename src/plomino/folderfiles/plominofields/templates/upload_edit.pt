@@ -1,0 +1,69 @@
+
+<tal:block tal:define="
+    widget python:options['field'].getSettings('widget');
+    maxsize python:options['field'].getSettings('maxsize') and options['field'].getSettings('maxsize');
+    extensions python:options['field'].getSettings('filetype') and options['field'].getSettings('filetype').replace(' ', '').replace(',', '|');
+    fieldName options/fieldname;
+    attachments options/fieldvalue;
+    filenames attachments/keys|nothing;
+    ">
+
+<div tal:content="widget"></div>
+<div tal:content="maxsize"></div>
+<div tal:content="extensions"></div>
+<div><ul tal:attributes="id string:${options/fieldname}-list" >
+    <tal:block tal:repeat="attachment filenames">
+        <li><a href="#" target="_new" tal:attributes="href python:'getattachment?filename='+attachment" tal:content="attachment">filename</a></li>
+    </tal:block>
+</ul></div>
+
+
+<tal:single tal:condition="python:widget=='SINGLE'">
+
+    <a class="directupload" class="contenttype-multiple-files link-overlay" title="A form to upload multiple files." tal:attributes="href string:@@directupload/$fieldName;rel string:#checosaserve;" style="cursor: pointer;">
+    <div class="iol-upload-doc" tal:attributes="name fieldName;data-maxsize maxsize;data-extensions extensions"></div>
+    </a>
+
+</tal:single>
+
+
+<tal:multi tal:condition="python:widget=='MULTI'">
+
+<div>
+
+    <a class="directupload" class="contenttype-multiple-files link-overlay" title="A form to upload multiple files." tal:attributes="href string:@@directupload/$fieldName?multi=1;rel string:#checosaserve;" style="cursor: pointer;">
+    <div class="iol-multi-upload-doc" tal:attributes="name fieldName;data-maxsize maxsize;data-extensions extensions"></div>
+    </a>
+
+</div>
+
+
+</tal:multi>
+
+<tal:downloadupload tal:condition="python:widget=='DOWN-UP'">
+
+  <a target="new" tal:attributes="id string:${options/fieldname}-download" ><div class="iol-wait-doc" tal:attributes="id string:${options/fieldname}-createdoc;name fieldName;"></div></a>
+    <a class="directupload"  id="string:directupload-$fieldName" class="contenttype-multiple-files link-overlay" title="A form to upload multiple files." tal:attributes="href string:@@directupload/$fieldName;rel string:#checosaserve;" style="cursor: pointer;">
+    <div class="iol-upload-doc" tal:attributes="data-maxsize maxsize;data-extensions extensions"></div>
+    </a>
+</tal:downloadupload>
+
+
+</tal:block>
+
+<!--
+
+<tal:block tal:define="attachments options/fieldvalue;
+                    filenames attachments/keys|nothing" 
+    tal:repeat="attachment filenames">
+    <tal:block tal:define="contenttype python:attachments[attachment]">
+        <a tal:condition="python:not(contenttype.startswith('image'))" href="#" tal:attributes="href python:'getfile?filename='+attachment" tal:content="attachment">filename</a>
+        <a tal:condition="python:contenttype.startswith('image')" href="#" tal:attributes="href python:'getfile?filename='+attachment">
+            <img tal:attributes="src python:'getfile?filename='+attachment" /></a>
+        <br/>
+    </tal:block>
+</tal:block>
+
+
+-->
+
